@@ -1,58 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Expandable App Grid</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable App Grid</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-  <div class="container">
-    <div class="dots-grid" id="dotsGrid">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
+    <div class="container">
+        <div class="dots-grid" id="dotsGrid">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <div class="apps-grid" id="appsGrid">
+            <div class="app-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-camera"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-music"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-calendar"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-gamepad"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-cog"></i>
+            </div>
+            <div class="app-icon">
+                <i class="fas fa-sticky-note"></i>
+            </div>
+        </div>
     </div>
-    
-    <div class="apps-grid" id="appsGrid">
-      <div class="app-icon">
-        <div class="icon">📱</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">📧</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">🌐</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">📷</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">🎵</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">🗓️</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">🎮</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">⚙️</div>
-      </div>
-      <div class="app-icon">
-        <div class="icon">📝</div>
-      </div>
-    </div>
-  </div>
-  
-  <div class="overlay" id="overlay"></div>
-  
-  <script src="script.js"></script>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
