@@ -15,6 +15,9 @@
   
   .container {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .dots-grid {
@@ -23,13 +26,16 @@
     grid-gap: 10px;
     width: 80px;
     height: 80px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
   
   .dot {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     background-color: #333;
     border-radius: 50%;
   }
@@ -37,17 +43,17 @@
   .apps-grid {
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(0);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     width: 300px;
     height: 300px;
-    background-color: white;
+    background-color: rgba(20, 20, 30, 0.9);
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.4s ease;
     z-index: 10;
@@ -60,37 +66,37 @@
   
   .app-icon {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 80px;
-    height: 80px;
-    background-color: #f8f8f8;
+    align-items: center;
+    width: 70px;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     opacity: 0;
-    transform: translateY(20px);
+    transform: scale(0);
+    position: relative;
   }
   
   .app-icon.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
   
   .app-icon:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px 5px #00e6ff;
+  }
+  
+  .app-icon:hover .icon {
+    color: #00e6ff;
   }
   
   .icon {
-    font-size: 24px;
-    margin-bottom: 5px;
-  }
-  
-  .app-name {
-    font-size: 12px;
-    color: #333;
+    font-size: 30px;
+    color: white;
+    transition: color 0.3s ease;
   }
   
   .overlay {
