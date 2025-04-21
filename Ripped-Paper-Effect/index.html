@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ripped Paper Effect</title>
+    <title>Realistic Ripped Paper Effect</title>
     <style>
         body {
             margin: 0;
@@ -18,20 +18,31 @@
 
         .container {
             position: relative;
-            width: 80%;
+            width: 90%;
             max-width: 800px;
             height: 500px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .background {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+            background-color: #e94b7f; /* Pink/red background like in the image */
+            z-index: 1;
+        }
+
+        /* Optional: Add a background image instead of solid color */
+        .background-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('/placeholder.svg?height=500&width=800');
             background-size: cover;
             background-position: center;
-            z-index: 1;
+            z-index: 2;
+            opacity: 0; /* Set to 1 if you want to use an image */
         }
 
         .paper {
@@ -39,133 +50,203 @@
             width: 100%;
             height: 100%;
             background-color: white;
-            z-index: 2;
-            /* Ripped paper effect using clip-path */
-            clip-path: polygon(
-                0% 0%, 
-                100% 0%, 
-                100% 20%, 
-                95% 22%, 
-                98% 25%, 
-                96% 30%, 
-                100% 35%, 
-                100% 70%, 
-                97% 73%, 
-                94% 71%, 
-                90% 75%, 
-                92% 80%, 
-                89% 85%, 
-                93% 90%, 
-                90% 95%, 
-                100% 100%, 
-                0% 100%, 
-                0% 90%, 
-                3% 85%, 
-                0% 80%, 
-                5% 75%, 
-                3% 70%, 
-                7% 65%, 
-                5% 60%, 
-                0% 55%, 
-                0% 40%, 
-                3% 35%, 
-                0% 30%, 
-                5% 25%, 
-                3% 20%, 
-                0% 15%
-            );
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 3;
         }
 
+        /* The hole in the paper */
         .hole {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 40%;
-            height: 40%;
-            z-index: 3;
-            /* Hole shape using clip-path */
-            clip-path: polygon(
-                30% 0%, 
-                70% 0%, 
-                75% 5%, 
-                80% 10%, 
-                85% 20%, 
-                90% 30%, 
-                85% 40%, 
-                90% 50%, 
-                85% 60%, 
-                80% 70%, 
-                70% 80%, 
-                60% 90%, 
-                50% 95%, 
-                40% 90%, 
-                30% 85%, 
-                20% 75%, 
-                15% 65%, 
-                10% 55%, 
-                5% 45%, 
-                10% 35%, 
-                5% 25%, 
-                15% 15%, 
-                25% 5%
-            );
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
             background-color: transparent;
+            /* Complex clip-path for the hole */
+            clip-path: polygon(
+                /* Top left section */
+                0% 0%,
+                30% 0%,
+                32% 2%,
+                35% 3%,
+                38% 2%,
+                40% 0%,
+                
+                /* Top right section */
+                60% 0%,
+                63% 2%,
+                65% 3%,
+                68% 2%,
+                70% 0%,
+                100% 0%,
+                
+                /* Right side */
+                100% 30%,
+                98% 32%,
+                97% 35%,
+                98% 38%,
+                100% 40%,
+                
+                /* Bottom right */
+                100% 60%,
+                98% 63%,
+                97% 65%,
+                98% 68%,
+                100% 70%,
+                100% 100%,
+                
+                /* Bottom left */
+                70% 100%,
+                68% 98%,
+                65% 97%,
+                62% 98%,
+                60% 100%,
+                40% 100%,
+                38% 98%,
+                35% 97%,
+                32% 98%,
+                30% 100%,
+                
+                /* Left side */
+                0% 70%,
+                2% 68%,
+                3% 65%,
+                2% 62%,
+                0% 60%,
+                0% 40%,
+                2% 38%,
+                3% 35%,
+                2% 32%,
+                0% 30%
+            );
         }
 
-        .paper-content {
-            padding: 20px;
-            font-size: 18px;
-            line-height: 1.6;
-            color: #333;
-        }
-
-        /* Ripped edges that stick out */
-        .ripped-edge {
+        /* Torn paper pieces that curl outward */
+        .torn-piece {
             position: absolute;
             background-color: white;
+            z-index: 5;
+            transform-origin: center;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            z-index: 4;
         }
 
-        .edge1 {
-            top: 22%;
-            right: -10px;
-            width: 20px;
+        /* Top torn pieces */
+        .piece-top-1 {
+            top: -5px;
+            left: 35%;
+            width: 80px;
             height: 30px;
-            transform: rotate(15deg);
-            border-radius: 0 0 5px 10px;
+            border-radius: 0 0 50% 20%;
+            transform: rotate(5deg);
         }
 
-        .edge2 {
-            top: 75%;
-            right: -8px;
-            width: 15px;
-            height: 25px;
-            transform: rotate(-10deg);
-            border-radius: 5px 0 10px 5px;
-        }
-
-        .edge3 {
-            top: 35%;
-            left: -12px;
-            width: 25px;
+        .piece-top-2 {
+            top: -8px;
+            left: 48%;
+            width: 100px;
             height: 40px;
-            transform: rotate(-20deg);
-            border-radius: 10px 5px 5px 0;
+            border-radius: 0 0 30% 40%;
+            transform: rotate(-8deg);
         }
 
-        .edge4 {
-            top: 65%;
-            left: -10px;
-            width: 20px;
-            height: 30px;
-            transform: rotate(25deg);
-            border-radius: 0 10px 5px 5px;
+        /* Right torn pieces */
+        .piece-right-1 {
+            top: 25%;
+            right: -15px;
+            width: 40px;
+            height: 90px;
+            border-radius: 20% 0 0 50%;
+            transform: rotate(-10deg);
         }
 
-        /* Torn paper texture */
+        .piece-right-2 {
+            top: 45%;
+            right: -20px;
+            width: 50px;
+            height: 120px;
+            border-radius: 30% 0 0 40%;
+            transform: rotate(8deg);
+        }
+
+        /* Bottom torn pieces */
+        .piece-bottom-1 {
+            bottom: -10px;
+            left: 35%;
+            width: 90px;
+            height: 35px;
+            border-radius: 50% 20% 0 0;
+            transform: rotate(-5deg);
+        }
+
+        .piece-bottom-2 {
+            bottom: -15px;
+            left: 55%;
+            width: 110px;
+            height: 45px;
+            border-radius: 30% 40% 0 0;
+            transform: rotate(7deg);
+        }
+
+        /* Left torn pieces */
+        .piece-left-1 {
+            top: 30%;
+            left: -18px;
+            width: 45px;
+            height: 100px;
+            border-radius: 0 50% 20% 0;
+            transform: rotate(12deg);
+        }
+
+        .piece-left-2 {
+            top: 55%;
+            left: -12px;
+            width: 35px;
+            height: 80px;
+            border-radius: 0 40% 30% 0;
+            transform: rotate(-5deg);
+        }
+
+        /* Inner torn edges */
+        .inner-edge {
+            position: absolute;
+            background-color: white;
+            z-index: 2;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .inner-top {
+            top: 0;
+            left: 40%;
+            width: 20%;
+            height: 15px;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .inner-right {
+            top: 40%;
+            right: 0;
+            width: 15px;
+            height: 20%;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .inner-bottom {
+            bottom: 0;
+            left: 40%;
+            width: 20%;
+            height: 15px;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .inner-left {
+            top: 40%;
+            left: 0;
+            width: 15px;
+            height: 20%;
+            border-radius: 0 50% 50% 0;
+        }
+
+        /* Paper texture overlay */
         .paper::after {
             content: '';
             position: absolute;
@@ -174,33 +255,55 @@
             width: 100%;
             height: 100%;
             background-image: url('data:image/png;base64,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');
-            opacity: 0.1;
+            opacity: 0.05;
+            pointer-events: none;
+        }
+
+        /* Shadow effect around the hole */
+        .shadow-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.2);
             pointer-events: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Background visible through the hole -->
+        <!-- Background color -->
         <div class="background"></div>
         
-        <!-- Paper with ripped edges -->
-        <div class="paper">
-            <div class="paper-content">
-                <h1>Ripped Paper Effect</h1>
-                <p>This is a demonstration of a ripped paper effect using only HTML and CSS. Notice how the paper appears torn with a hole in the middle, revealing the background image.</p>
-                <p>The ripped edges are created using CSS clip-path and additional elements to create the illusion of paper sticking out.</p>
-            </div>
-        </div>
+        <!-- Optional background image (set opacity to 1 in CSS to use) -->
+        <div class="background-image"></div>
+        
+        <!-- Paper layer -->
+        <div class="paper"></div>
         
         <!-- Hole in the paper -->
         <div class="hole"></div>
         
-        <!-- Ripped edges that stick out -->
-        <div class="ripped-edge edge1"></div>
-        <div class="ripped-edge edge2"></div>
-        <div class="ripped-edge edge3"></div>
-        <div class="ripped-edge edge4"></div>
+        <!-- Inner torn edges -->
+        <div class="inner-edge inner-top"></div>
+        <div class="inner-edge inner-right"></div>
+        <div class="inner-edge inner-bottom"></div>
+        <div class="inner-edge inner-left"></div>
+        
+        <!-- Torn paper pieces that curl outward -->
+        <div class="torn-piece piece-top-1"></div>
+        <div class="torn-piece piece-top-2"></div>
+        <div class="torn-piece piece-right-1"></div>
+        <div class="torn-piece piece-right-2"></div>
+        <div class="torn-piece piece-bottom-1"></div>
+        <div class="torn-piece piece-bottom-2"></div>
+        <div class="torn-piece piece-left-1"></div>
+        <div class="torn-piece piece-left-2"></div>
+        
+        <!-- Shadow effect around the hole -->
+        <div class="shadow-effect"></div>
     </div>
 </body>
 </html>
